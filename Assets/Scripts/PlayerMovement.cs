@@ -22,6 +22,7 @@ public class PlayerMovement : MonoBehaviour
     public TilemapCollider2D pegCollision;
     public Color pegShade;
     public Tilemap pegTilemap;
+    public LayerMask whatIsKillBlock;
 
 
     private Rigidbody2D rb;
@@ -36,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isDead = false;
 
     void Awake() {
-        
+        isDead = false;
     }    
 
     // Start is called before the first frame update
@@ -59,8 +60,6 @@ public class PlayerMovement : MonoBehaviour
     {
         //Doc to help me for moving forward: https://discussions.unity.com/t/transform-forward-in-2d/182904
         isMoving = true;
-
-        OnCollisionEnter2D;
 
         //Old WASD Movement
         /*
@@ -105,13 +104,14 @@ public class PlayerMovement : MonoBehaviour
     {
         //Multiplying playerSpeed by the player's front direction
         rb.velocity = new UnityEngine.Vector2(playerDirection.x * playerSpeed, playerDirection.y * playerSpeed);
+
     }
 
-    private void OnCollisionEnter2D(TilemapCollider2D other) {
+    private void OnCollisionEnter2D(Collision2D other) {
 
-        if (other.tag == "KillBlock") {
+        if (other.collider.tag == "KillBlock") {
             isDead = true;
-            GameManager.instance.GameOver();
+            GameManager.instance.RestartGame();
         }
     }
 }

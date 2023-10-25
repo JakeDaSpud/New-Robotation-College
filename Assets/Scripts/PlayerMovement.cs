@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
 
 
     private Rigidbody2D rb;
-    private bool isMoving = false;
+    //private bool isMoving = false;
     //Old variables for arm bending mechanic
     /*
     private bool leftHandActive = false;
@@ -59,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         //Doc to help me for moving forward: https://discussions.unity.com/t/transform-forward-in-2d/182904
-        isMoving = true;
+        //isMoving = true;
 
         //Old WASD Movement
         /*
@@ -75,10 +75,12 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetMouseButtonDown(0)) {
             
             if (pegCollision.enabled) {
+                //Darken pegs
                 pegTilemap.color = pegShade;
             }
 
             else {
+                //Return pegs to original colour
                 pegTilemap.color = ogPegColour;
             }
             
@@ -108,7 +110,8 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-
+        
+        //Check if player is touching kill block
         if (other.collider.tag == "KillBlock") {
             isDead = true;
             GameManager.instance.RestartGame();

@@ -87,6 +87,8 @@ public class PlayerMovement : MonoBehaviour
             //Flip whether pegCollision is on
             pegCollision.enabled = !pegCollision.enabled;
 
+            AudioManager.instance.PlayPegClip();
+
             //Old arm bending system, changed the game mechanic to be pegs changing instead
             /*
             if (leftHandActive) {

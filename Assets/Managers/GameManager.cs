@@ -66,6 +66,10 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         player.isDead = false;
     }
+    
+    public void NextLevel() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+    }
 
     public void LoadMainMenu() {
         SceneManager.LoadScene("MainMenu");

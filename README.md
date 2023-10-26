@@ -15,6 +15,7 @@ Art Style:
 
 Controls:
 - Left Mouse Button: Toggle the Pegs on and off (On by default)
+- Escape Key: Return to main menu
 
 Inspirations / Similar Ideas:
 - Sonic Special Stage\
@@ -26,3 +27,7 @@ Inspirations / Similar Ideas:
 - Stickman Hook\
 <img src="https://picx.zhimg.com/v2-a020e18f435e5151ef3d1496985e4a39_720w.gif" width="200">\
 [Source](https://picx.zhimg.com/v2-a020e18f435e5151ef3d1496985e4a39_720w.gif?source=172ae18b)
+
+Known Bugs:
+- Level 2 ends in an infinite loop of replaying level 2, no proper end.
+- If Xy (Player) drifts off into the void, they will not die, you will need to return to the main menu using the Escape Key.

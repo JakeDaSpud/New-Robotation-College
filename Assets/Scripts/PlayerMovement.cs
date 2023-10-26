@@ -58,8 +58,6 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Doc to help me for moving forward: https://discussions.unity.com/t/transform-forward-in-2d/182904
-        //isMoving = true;
 
         //Old WASD Movement
         /*
@@ -72,6 +70,29 @@ public class PlayerMovement : MonoBehaviour
         //playerFacingVector is right in front of the player, the x and y are minused from the player's x and y
         playerDirection = new UnityEngine.Vector2(playerFacingVector.transform.position.x - rb.transform.position.x, playerFacingVector.transform.position.y - rb.transform.position.y).normalized;
 
+        HandlePegInput();
+        HandleEscapeInput();
+    }
+
+    void FixedUpdate()
+    {
+        //Multiplying playerSpeed by the player's front direction
+        rb.velocity = new UnityEngine.Vector2(playerDirection.x * playerSpeed, playerDirection.y * playerSpeed);
+
+    }
+
+    private void OnCollisionEnter2D(Collision2D other) {
+        
+        //Check if player is touching kill block
+        if (other.collider.tag == "KillBlock") {
+            isDead = true;
+            GameManager.instance.RestartGame();
+        }
+    }
+
+    private void HandlePegInput() {
+        //Doc to help me for moving forward: https://discussions.unity.com/t/transform-forward-in-2d/182904
+        //isMoving = true;
         if (Input.GetMouseButtonDown(0)) {
             
             if (pegCollision.enabled) {
@@ -104,19 +125,9 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
-    {
-        //Multiplying playerSpeed by the player's front direction
-        rb.velocity = new UnityEngine.Vector2(playerDirection.x * playerSpeed, playerDirection.y * playerSpeed);
-
-    }
-
-    private void OnCollisionEnter2D(Collision2D other) {
-        
-        //Check if player is touching kill block
-        if (other.collider.tag == "KillBlock") {
-            isDead = true;
-            GameManager.instance.RestartGame();
+    private void HandleEscapeInput() {
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            GameManager.instance.LoadMainMenu();
         }
     }
 }
